@@ -1,19 +1,43 @@
-Does gold meaningfully reduce catastrophic drawdown risk in a long-horizon equity portfolio, or is that conventional wisdom nobody actually tests?
+**Hook**
+Does gold actually lower the chance of a big crash in a long-term portfolio, or is that just something people repeat without checking?
 
-I built a block-bootstrap Monte Carlo engine (Node.js, no external libraries) against real historical monthly returns back to 1977, and tested a 51% global equities / 12.75% small-cap value / 7.87% long-duration bonds / 25% gold / 3.38% short-term bonds allocation across a 30-year horizon.
+**What I did**
+I built a Monte Carlo simulation (Node.js, no external libraries) using real historical monthly returns going back to 1977, and tested a portfolio of 51% global stocks, 12.75% small-cap value stocks, 7.87% long-term bonds, 25% gold, and 3.38% short-term bonds over a 30-year period.
 
-Findings, verified across repeated independent bootstrap runs:
+**Findings**
+→ Chance of losing 50% or more, ever: about 2.5 to 2.6%, vs. about 11.5% for the same portfolio with no gold
+→ Median 30-year outcome: about 31x on invested capital, Sharpe ratio about 0.95
+→ Stable result across every starting decade I tested (1970s, 1980s, 1990s), not just one lucky window
 
-→ P(portfolio ever draws down ≥50%): ≈2.5–2.6%, vs. ≈11.5% for the same portfolio with no gold
-→ Median 30-year outcome: ≈31x on invested capital, Sharpe ratio ≈0.95
-→ Result is stable across every starting decade tested (1970s, 1980s, 1990s), not a single lucky window
+**One honest caveat**
+Most of the benefit comes from the first 10% of gold you add. After that it flattens out, and it's not perfectly consistent (20% gold actually tests a bit better than 25% on drawdown risk in this data). I went with 25% because it has the best Sharpe ratio of what I tested, not because more gold is always better.
 
-One finding worth being precise about: the risk reduction is front-loaded, not linear. Moving from 0% to 10% gold captures most of the benefit; beyond that, the drawdown-risk curve flattens and isn't strictly monotonic — 20% gold tests marginally better than 25% on tail risk in this dataset. The case for 25% rests on it carrying the best Sharpe ratio of the range tested, not on "more gold is always better."
+**Link**
+Full code, data, and a short written report: https://github.com/iliasprountzos8-svg/portfolio-drawdown-analysis
 
-The part I'd flag as more important than any of the numbers above: while packaging this for publication, I found that an earlier "confirmed" result from the same codebase didn't reproduce against current data — a data file had been silently regenerated after the confirmation run that cited it, and nobody re-ran the check. Re-running the identical, unmodified script against today's data gave materially different numbers. The figures in this post are the re-verified ones. I think that failure mode — a result quietly going stale after the underlying data changes — is worth naming explicitly rather than glossing over, because it's an easy trap in any analysis pipeline, not just this one.
+**Disclaimer + hashtags**
+Not financial advice, just a personal attempt to test a common claim with real data.
 
-Full methodology, code, and a short write-up: https://github.com/iliasprountzos8-svg/portfolio-drawdown-analysis
+#Finance #QuantitativeFinance #PortfolioConstruction #RiskManagement #MonteCarloSimulation
 
-Not financial advice — a research exercise in taking a common claim and actually testing it against real data.
+---
+
+## Ready-to-post version (paste this)
+
+Does gold actually lower the chance of a big crash in a long-term portfolio, or is that just something people repeat without checking?
+
+I built a Monte Carlo simulation (Node.js, no external libraries) using real historical monthly returns going back to 1977, and tested a portfolio of 51% global stocks, 12.75% small-cap value stocks, 7.87% long-term bonds, 25% gold, and 3.38% short-term bonds over a 30-year period.
+
+Findings, checked across several independent runs:
+
+→ Chance of losing 50% or more, ever: about 2.5 to 2.6%, vs. about 11.5% for the same portfolio with no gold
+→ Median 30-year outcome: about 31x on invested capital, Sharpe ratio about 0.95
+→ Stable result across every starting decade I tested (1970s, 1980s, 1990s), not just one lucky window
+
+One honest caveat: most of the benefit comes from the first 10% of gold you add. After that it flattens out, and it's not perfectly consistent (20% gold actually tests a bit better than 25% on drawdown risk in this data). I went with 25% because it has the best Sharpe ratio of what I tested, not because more gold is always better.
+
+Full code, data, and a short written report: https://github.com/iliasprountzos8-svg/portfolio-drawdown-analysis
+
+Not financial advice, just a personal attempt to test a common claim with real data.
 
 #Finance #QuantitativeFinance #PortfolioConstruction #RiskManagement #MonteCarloSimulation
