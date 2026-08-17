@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Portfolio Drawdown Analysis — Charts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-1:      #fcfcfb;
+    --surface-2:      #f3f2ef;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #83817a;
+    --border:         #e3e1db;
+    --accent:         #1F3A5F;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1:      #1a1a19;
+      --surface-2:      #242422;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #8f8d84;
+      --border:         #3a3936;
+      --accent:         #6f96c4;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-1:      #1a1a19;
+    --surface-2:      #242422;
+    --text-primary:   #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #8f8d84;
+    --border:         #3a3936;
+    --accent:         #6f96c4;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--surface-1); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  .viz-root { max-width: 920px; margin: 0 auto; padding: 40px 24px 56px; color: var(--text-primary); }
+
+  .masthead { margin-bottom: 28px; }
+  .eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+  h1 { font-size: 26px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.25; }
+  .subtitle { color: var(--text-secondary); font-size: 14.5px; margin: 0; max-width: 640px; line-height: 1.5; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 8px; }
+  .stat-tile { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; }
+  .stat-value { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 2px; }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.35; }
+
+  .section-divider { border: none; border-top: 1px solid var(--border); margin: 40px 0 28px; }
+
+  .chart-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 22px 22px 20px; margin-bottom: 24px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .chart-title { font-size: 15.5px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.005em; }
+  .chart-note { font-size: 12.5px; color: var(--text-muted); margin: 0 0 16px; line-height: 1.5; max-width: 680px; }
+  .chart-card img { width: 100%; height: auto; border-radius: 6px; background: white; display: block; }
+
+  .footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--text-muted); line-height: 1.6; }
+  .footer strong { color: var(--text-secondary); }
+</style>
+</head>
+<body>
+<div class="viz-root">
+  <div class="masthead">
+    <p class="eyebrow">Research Notes</p>
+    <h1>Does gold reduce catastrophic drawdown risk in a long-horizon portfolio?</h1>
+    <p class="subtitle">A real-history Monte Carlo answer: block-bootstrapped from 1977–2023 monthly returns, verified across 6+ independent runs. Full methodology and code on GitHub.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-tile">
+      <p class="stat-value">≈2.6%</p>
+      <p class="stat-label">P(portfolio ever draws down ≥50%), tested allocation</p>
+    </div>
+    <div class="stat-tile">
+      <p class="stat-value">≈31.5x</p>
+      <p class="stat-label">Median 30-year outcome, lump-sum bootstrap</p>
+    </div>
+    <div class="stat-tile">
+      <p class="stat-value">199</p>
+      <p class="stat-label">Real overlapping 30-year windows tested, 1977–2023</p>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="chart-card">
+    <p class="chart-title">Distribution of Simulated 30-Year Outcomes</p>
+    <p class="chart-note">50,000-trial block-bootstrap, dollar-cost-averaged €150/mo contribution, tested allocation (51% equities / 12.75% small-cap value / 7.87% long bonds / 25% gold / 3.38% short bonds).</p>
+    <img src="charts/distribution_histogram.png" alt="Histogram of simulated 30-year outcomes">
+  </div>
+
+  <div class="chart-card">
+    <p class="chart-title">300 Simulated 30-Year Portfolio Paths</p>
+    <p class="chart-note">Same allocation, illustrative €150/mo contribution. Thin lines are individual simulated futures; the bold line is the median path; the shaded band is the 10th–90th percentile range.</p>
+    <img src="charts/fan_chart.png" alt="Fan chart of simulated portfolio paths over 30 years">
+  </div>
+
+  <div class="chart-card">
+    <p class="chart-title">Return vs. Catastrophic Drawdown Risk Across Gold Allocations</p>
+    <p class="chart-note">100,000-trial lump-sum bootstrap per allocation, real historical data, same engine throughout — no parametric assumptions. Risk drops sharply from 0% to ~10% gold; beyond that the trade-off flattens and isn't strictly monotonic.</p>
+    <img src="charts/gold_comparison.png" alt="Median outcome and drawdown risk by gold allocation">
+  </div>
+
+  <div class="chart-card">
+    <p class="chart-title">Outcome Stability Across Starting Decades</p>
+    <p class="chart-note">199 real overlapping 30-year windows, 1977–2023, grouped by starting decade — tests whether the result depends on a lucky start date rather than a single lump-sum bootstrap draw.</p>
+    <img src="charts/decade_stability.png" alt="Median 30-year outcome by starting decade for three candidate allocations">
+  </div>
+
+  <div class="footer">
+    <strong>Not financial advice.</strong> Personal research project for educational purposes — simulated historical backtests do not guarantee future results.<br>
+    Methodology, source code, and data: see the project README on GitHub.
+  </div>
+</div>
+</body>
+</html>

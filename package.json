@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-drawdown-analysis",
+  "version": "1.0.0",
+  "description": "Monte Carlo backtesting of gold/bond allocation for catastrophic-drawdown reduction, 1977-2023 real market history, 10M-trial confidence run.",
+  "main": "src/final_confidence_10M_trials.js",
+  "scripts": {
+    "confidence": "node src/final_confidence_10M_trials.js",
+    "walkforward": "node src/walkforward_validation.js",
+    "gold-comparison": "node src/gold_allocation_comparison.js",
+    "regime-test": "node src/rate_regime_conditional_test.js"
+  },
+  "license": "MIT",
+  "author": "Ilias Prountzos"
+}
