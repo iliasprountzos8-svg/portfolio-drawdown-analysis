@@ -1,3 +1,22 @@
+## If uploading the PDF as a document (recommended)
+
+**Document title** (when LinkedIn prompts for one):
+Does Gold Reduce Portfolio Crash Risk? A Data Test
+
+**Short caption** (use with the PDF, not the long version below):
+
+Does gold actually lower the chance of a big crash in a long-term portfolio, or is that just something people repeat without checking?
+
+I tested it with a Monte Carlo simulation on real market data back to 1977. Full write-up attached, code and data here: https://github.com/iliasprountzos8-svg/portfolio-drawdown-analysis
+
+Not financial advice, just a personal attempt to test a common claim with real numbers.
+
+#Finance #QuantitativeFinance #PortfolioConstruction #RiskManagement #MonteCarloSimulation
+
+---
+
+## Alternative, longer version (if uploading just an image, not the PDF)
+
 **Hook**
 Does gold actually lower the chance of a big crash in a long-term portfolio, or is that just something people repeat without checking?
 
