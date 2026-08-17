@@ -12,7 +12,7 @@ One finding worth being precise about: the risk reduction is front-loaded, not l
 
 The part I'd flag as more important than any of the numbers above: while packaging this for publication, I found that an earlier "confirmed" result from the same codebase didn't reproduce against current data — a data file had been silently regenerated after the confirmation run that cited it, and nobody re-ran the check. Re-running the identical, unmodified script against today's data gave materially different numbers. The figures in this post are the re-verified ones. I think that failure mode — a result quietly going stale after the underlying data changes — is worth naming explicitly rather than glossing over, because it's an easy trap in any analysis pipeline, not just this one.
 
-Full methodology, code, and a 4-page write-up: [link]
+Full methodology, code, and a short write-up: https://github.com/iliasprountzos8-svg/portfolio-drawdown-analysis
 
 Not financial advice — a research exercise in taking a common claim and actually testing it against real data.
 
